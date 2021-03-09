@@ -1,0 +1,123 @@
+ Ao copiar uma pasta muito grande com 5000 arquivos para backup deu erro!
+
+Então fiz essa implementação.
+
+Necessário python3 instalado, nas versões recentes já vem instalado por padrão, verifique: $ which python3
+
+Caso retorne: " /usr/bin/python3" já esta instalado. Se não retorna nada instale com:
+
+$ apt install python3
+
+Crie os arquivos com os nomes e siga as instruções do arquivo .sh
+
+-------------------------  nome do arquivo: contaArquivosEmDiretorios .sh
+
+#!/bin/sh
+# Mostra o diretório com mais arquivos no final
+#Abra um terminal na mesma pasta e execute $ ./contaArquivosEmDiretorios.sh
+#Salva um arquivo na Pasta Pessoal
+cp contaArquivosEmDiretorios.py ~/contaArquivosEmDiretorios.py
+cd ~
+ls -Rl|egrep "^./|^-" >> contaArquivos.txt
+python3 contaArquivosEmDiretorios.py
+rm -r contaArquivos.txt
+rm -r contaArquivosEmDiretorios.py
+
+-------------------------
+
+ 
+
+-------------------------   nome do arquivo: contaArquivosEmDiretorios.py
+
+def contaArquivo():#inclui ocultos
+    file = 'contaArquivos.txt'
+    with open(file, 'r') as txt:
+        text = txt.readlines()
+        m, c, a, f, tf = 0, 0, '~\n', '', ''
+        for i in text:
+            if i[0] == '.':
+                if m < c:
+                    f = a
+                    m = c
+                #print(c,a)
+                tf += str(c)
+                tf += a
+                a = i
+                c = 0
+               
+            if i[0] == '-':
+                c += 1
+        print(tf,'------Direttorio com mais arquivos:\n', f, m,'\n')
+    file = 'contaArquivosPy.txt'
+    with open(file, 'w') as txt:
+        txt.write(str(tf))
+contaArquivo()
+
+-------------------------
+
+------------------------- nome do arquivo: contaArquivosEmDiretorios.py
+
+def contaArquivo(): #versão 2 ordena as pastas :)
+
+    file = 'contaArquivos.txt'
+    with open(file, 'r') as txt:
+        text = txt.readlines()
+       
+        m, c, a, f, tf, tf1 = 0, 0, '~\n', '', '', ''
+        for i in text:
+            if i[0] == '.':
+                if m < c:
+                    f = a
+                    m = c
+                #print(c,a)
+                tf += str(c)
+                tf += a
+                a = i
+                c = 0
+            if i[0] == '-':
+                c += 1
+        tf += "----------Maior----------:\n     " + str(m) + f + "----------\n"
+    #return tf
+    
+    r = input("Gravar? (s) : ")
+    if r == "s":
+        file = 'contaArquivosPy.txt'
+        with open(file, 'w') as txt:
+            txt.write(str(tf))
+           
+def ordena(m):# m = maior quantidade de arquivos na pasta, ate (999)testado.
+    #print(text)
+    file = 'contaArquivosPy.txt'
+    with open(file, 'r') as txt:
+        text = txt.readlines()
+    print(text)
+    i0, tf1, tf2, tf3, cont = 0, '', '', '',''
+    while i0 <= m:
+        for i in text:
+            #print(i[0], i0, i)
+            if i[:2] == str(i0)+".":
+                #print("grava1:",i)
+                tf1 += i
+            if i[:3] == str(i0)[:2]+"." and i0 < 100:# 100[:2]+"."=10. ;)
+                print(i[:3],str(i0)[:2]+".",i,end='')
+                tf2 += i
+            cont += str(i0)+","
+            if i[:4] == str(i0)[:3]+".":
+                tf3 += i
+        i0 += 1
+    cont = tf1 + tf2 + tf3
+    print(cont)
+    #return cont
+    #print(tf1, "<---tf1 (1 digito.), e tf2 (2 diditos.)--->\n", tf2)
+    #print("3 digitos: --->\n", tf3)
+    
+    r = input("Gravar? (s) : ")
+    if r == "s":
+        file = 'ordenadosPy.txt'
+        with open(file, 'w') as txt:
+            txt.write(str(cont))
+
+contaArquivo()
+m = 999
+ordena(m)
+ ------------------------- 
