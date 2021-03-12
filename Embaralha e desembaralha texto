@@ -1,0 +1,64 @@
+# Felipe Tanii data de criacao 20210117
+# Na mesma pasta
+# Nomeie o arquivo a ser criptografado como texto1 
+# Nomeie o arquivo a ser descriptografado como texto2
+# Abra um terminal
+# Digite: python3 cript8.py # Requer python3 instalado 
+def invert(string):
+    print('Invertendo', len(string))
+    pos = len(string)-1
+    stringRe = ""
+    while pos >= 0:
+       stringRe = stringRe + string[pos]
+       pos = pos - 1
+    return stringRe
+def embaralha(entra):
+    print('Embaralhando', len(entra))
+    out1 = out2 = ''
+    for i in range(len(entra)):
+        if i == 0 or i % 2 == 0:
+            out1 += entra[i]
+        else:
+            out2 += entra[i]
+    out2 += out1
+    return out2
+def desembaralha(entra):
+    print('Desenbaralhando', len(entra))
+    i, n, out = 0, 0, ''
+    n = len(entra) // 2
+    while i <= (len(entra)) // 2:
+        if n < len(entra): #print('!n', n)
+            out += entra[n]
+            n += 1
+        if i < len(entra) // 2:
+            out += entra[i]
+        i += 1
+    return out
+def ch():
+    cho = input('\n1-cript, 2-deCript: ')
+    if cho == "1":
+        file = "texto1"
+        with open(file, 'r') as text:
+            txt = text.read()
+            texto = embaralha(invert(embaralha(txt)))
+        print(len(txt), len(texto), 'I/O\n', txt, texto)
+        file = "texto2"
+        with open(file, 'w') as text:
+            text.write(texto)
+    if cho == "2":
+        file = "texto2"
+        with open(file, 'r') as text:
+            txt = text.read()
+            texto = desembaralha(invert(desembaralha(txt)))
+        print(len(txt), len(texto), 'I/O\n', txt, texto)
+        file = "texto3"
+        with open(file, 'w') as text:
+            text.write(texto)
+    else:
+        print('                       1 ou 2 !')
+        ch()
+    ch()
+ch()
+
+    
+
