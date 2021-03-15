@@ -2,7 +2,7 @@
 ----- Instalar os pacotes:
 $ sudo apt install python3-pip
 $ pip3 install pynput
-$ sudo apt intall screen 
+$ sudo apt install screen 
 - A seguir substitua "sp" pelo nome da sua pasta de usuario!
 $ cd /home/sp 
 $ nano .kllgr.py 
